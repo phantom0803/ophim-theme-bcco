@@ -1,0 +1,28 @@
+.btn-green {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.btn-green.active, .btn-green:active, .btn-green:focus, .btn-green:hover {
+    background-color: #4cae4c;
+    border-color: #449d44;
+}
+
+.block-wrapper {
+    margin: 10px 0;
+}
+
+.btn-active {
+    color: #fff !important;
+    background-color: #d9534f !important;
+    border-color: #d9534f !important;
+}
+
+.btn-sv {
+    margin-right: 5px;
+}
+
+.btn-sv:last-child {
+    margin-right: 0;
+}
