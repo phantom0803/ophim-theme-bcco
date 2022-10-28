@@ -108,7 +108,7 @@ class ThemeBccoServiceProvider extends ServiceProvider
                                             <div class="widget widget-about">
                                                 <div class="logo2"><img width="128" height="33"
                                                                         alt="OPHIMCMS | Xem Phim Thuyết Minh VietSub"
-                                                                        src="/themes/bcco/images/logo.png"/></div>
+                                                                        src="https://ophim.cc/logo-ophim-5.png"/></div>
                                                 <p class="nomargin">Tổng hợp phim mới, phim HOT vietsub, thuyết minh nhanh nhất. Xem phim
                                                     nhanh online miễn phí, chất lượng full HD.</p></div>
                                         </div>
