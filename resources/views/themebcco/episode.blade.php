@@ -33,14 +33,14 @@
                 <div class="rating-block">
                     <div class="box-rating" itemprop="aggregateRating" itemscope
                         itemtype="https://schema.org/AggregateRating">
-                        <div id="star" data-score="{{ number_format($currentMovie->rating_star ?? 0, 1) }}"
-                            style="cursor: pointer;"></div>
+                        <div id="star" data-score="{{ $currentMovie->getRatingStar() }}" style="cursor: pointer;">
+                        </div>
                         <div>
                             <div id="div_average" style="line-height: 16px; margin: 0 5px; ">
                                 <span id="hint"></span> ( <span class="average" id="average" itemprop="ratingValue">
-                                    {{ number_format($currentMovie->rating_star ?? 0, 1) }}</span>&nbsp;điểm
+                                    {{ $currentMovie->getRatingStar() }}</span>&nbsp;điểm
                                 /&nbsp; <span id="rate_count"
-                                    itemprop="ratingCount">{{ $currentMovie->rating_count ?? 0 }}</span>
+                                    itemprop="ratingCount">{{ $currentMovie->getRatingCount() }}</span>
                                 &nbsp;lượt)
                             </div>
                             <meta itemprop="bestRating" content="10" />
@@ -58,8 +58,9 @@
                         <div class="epi-block-right">
                             <div class="movie-eps-wrapper cscroller">
                                 @foreach ($data->sortByDesc('name', SORT_NATURAL)->groupBy('name') as $name => $item)
-                                    <a href="{{ $item->sortByDesc('type')->first()->getUrl() }}" class="movie-eps-item @if ($item->contains($episode)) btn-active @endif"
-                                    title="{{ $name }}">{{ $name }}</a>
+                                    <a href="{{ $item->sortByDesc('type')->first()->getUrl() }}"
+                                        class="movie-eps-item @if ($item->contains($episode)) btn-active @endif"
+                                        title="{{ $name }}">{{ $name }}</a>
                                 @endforeach
                             </div>
                         </div>
@@ -71,7 +72,7 @@
                 <div class="col-md-2 d-none d-sm-block pr-0">
                     <img class="movie-thumb img"
                         alt="{{ $currentMovie->name }} | {{ $currentMovie->origin_name }} ({{ $currentMovie->publish_year }})"
-                        src="{{ $currentMovie->thumb_url }}" itemprop="image">
+                        src="{{ $currentMovie->getThumbUrl() }}" itemprop="image">
                 </div>
                 <div class="col-md-10 col-12">
                     <div class="head">
@@ -81,7 +82,7 @@
                         </div>
                         <div class="meta-info">
                             @if ($currentMovie->content)
-                                {!! mb_substr($currentMovie->content, 0, 300, 'utf-8') !!} ... <a class="btn-viewmore"
+                                {!! mb_substr(strip_tags($currentMovie->content), 0, 290, 'utf-8') !!} ... <a class="btn-viewmore"
                                     href="{{ $currentMovie->getUrl() }}">Xem thêm</a>
                             @else
                                 <p>Hãy xem phim để cảm nhận...</p>
@@ -127,7 +128,7 @@
     <script src="/js/jwplayer.hlsjs.min.js"></script>
 
     <script>
-        var episode_id = {{$episode->id}};
+        var episode_id = {{ $episode->id }};
         const wrapper = document.getElementById('playerLoaded');
         const vastAds = "{{ Setting::get('jwplayer_advertising_file') }}";
 
@@ -166,7 +167,7 @@
                         key: "{{ Setting::get('jwplayer_license') }}",
                         aspectratio: "16:9",
                         width: "100%",
-                        file: "/themes/legend/player/1s_blank.mp4",
+                        file: "/themes/bcco/player/1s_blank.mp4",
                         volume: 100,
                         mute: false,
                         autostart: true,
@@ -216,7 +217,7 @@
                     key: "{{ Setting::get('jwplayer_license') }}",
                     aspectratio: "16:9",
                     width: "100%",
-                    image: "{{ $currentMovie->poster_url ?: $currentMovie->thumb_url }}",
+                    image: "{{ $currentMovie->getPosterUrl() }}",
                     file: link,
                     playbackRateControls: true,
                     playbackRates: [0.25, 0.75, 1, 1.25],
@@ -342,7 +343,7 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const episode = '{{$episode->id}}';
+            const episode = '{{ $episode->id }}';
             let playing = document.querySelector(`[data-id="${episode}"]`);
             if (playing) {
                 playing.click();

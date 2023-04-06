@@ -3,7 +3,7 @@
         <div class="movie-box-2 mb-1">
             <div class="listing-container">
                 <div class="listing-image">
-                    <div data-bg="url({{$movie->thumb_url}})" class="r43 rocket-lazyload">
+                    <div data-bg="url({{$movie->getThumbUrl()}})" class="r43 rocket-lazyload">
                     </div>
                 </div>
                 <div class="listing-content text-left">

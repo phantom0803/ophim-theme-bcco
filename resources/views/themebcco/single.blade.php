@@ -12,7 +12,7 @@
                     <div class="movie-thumb position-relative">
                         <img class="img img-fluid"
                             alt="{{ $currentMovie->name }} | {{ $currentMovie->origin_name }} ({{ $currentMovie->publish_year }})"
-                            src="{{ $currentMovie->thumb_url }}" itemprop="image">
+                            src="{{ $currentMovie->getThumbUrl() }}" itemprop="image">
 
                         @if (!$currentMovie->is_copyright && count($currentMovie->episodes) && $currentMovie->episodes[0]['link'] != '')
                             <a href="{{ $currentMovie->episodes->sortBy([['server', 'asc']])->groupBy('server')->first()->sortByDesc('name', SORT_NATURAL)->groupBy('name')->last()->sortByDesc('type')->first()->getUrl() }}" class="btn btn-danger btn-block mt-2">Xem Phim</a>
@@ -82,15 +82,15 @@
                         <div class="rating-block">
                             <div class="box-rating" itemprop="aggregateRating" itemscope
                                 itemtype="https://schema.org/AggregateRating">
-                                <div id="star" data-score="{{ number_format($currentMovie->rating_star ?? 0, 1) }}"
+                                <div id="star" data-score="{{$currentMovie->getRatingStar()}}"
                                     style="cursor: pointer;"></div>
                                 <div>
                                     <div id="div_average" style="line-height: 16px; margin: 0 5px; ">
                                         <span id="hint"></span> ( <span class="average" id="average"
                                             itemprop="ratingValue">
-                                            {{ number_format($currentMovie->rating_star ?? 0, 1) }}</span>&nbsp;điểm
+                                            {{$currentMovie->getRatingStar()}}</span>&nbsp;điểm
                                         /&nbsp; <span id="rate_count"
-                                            itemprop="ratingCount">{{ $currentMovie->rating_count ?? 0 }}</span>
+                                            itemprop="ratingCount">{{$currentMovie->getRatingCount()}}</span>
                                         &nbsp;lượt)
                                     </div>
                                     <meta itemprop="bestRating" content="10" />

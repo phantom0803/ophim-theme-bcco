@@ -12,7 +12,7 @@
                         <div class="watch-later-item">
                             <div class="listing-container">
                                 <div class="listing-image">
-                                    <div data-bg="url({{ $movie->thumb_url }})"
+                                    <div data-bg="url({{ $movie->getThumbUrl() }})"
                                         class="r43 rocket-lazyload"></div>
                                 </div>
                                 <div class="listing-content">
